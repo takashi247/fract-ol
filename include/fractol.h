@@ -10,6 +10,7 @@
 # define THRESHOLD_RADIUS 2.0
 # define SCREEN_TITLE_JULIA "Julia set"
 # define SCREEN_TITLE_MANDELBROT "Mandelbrot set"
+# define BLUE 0x000000FF
 
 typedef enum e_bool
 {
@@ -42,5 +43,19 @@ typedef struct s_complex
 	double	real;
 	double	imag;
 }	t_complex;
+
+/* draw_julia.c */
+void		ft_draw_julia(t_fractol fractol, t_complex c);
+
+/* util_complex.c */
+t_complex	ft_square_complex(t_complex z);
+t_complex	ft_add_complex(t_complex z, t_complex c);
+double		ft_get_modulus(t_complex z);
+
+/* util_mlx.c */
+void		ft_mlx_pixel_put_screen(t_screen *screen, int x, int y, int color);
+
+/* draw_mandelbrot.c */
+void		ft_draw_mandelbrot(t_fractol fractal);
 
 #endif

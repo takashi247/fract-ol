@@ -77,5 +77,7 @@ int
 		ft_draw_mandelbrot(fractol);
 	mlx_put_image_to_window(fractol.mlx, fractol.screen.mlx_win,
 		fractol.screen.img, 0, 0);
+	mlx_hook(fractol.screen.mlx_win, CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK,
+		ft_close_fractol, &fractol);
 	mlx_loop(fractol.mlx);
 }

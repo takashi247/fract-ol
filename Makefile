@@ -31,13 +31,16 @@ endif
 
 RM			:= rm -f
 
+# DEBUG 		:=
+DEBUG		:= -g -fsanitize=address
+
 all:		mlx_clone $(NAME)
 
 $(NAME):	$(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDE) $^ $(LIBRARY) -o $@
+	$(CC) $(CFLAGS) $(DEBUG) $(INCLUDE) $^ $(LIBRARY) -o $@
 
 .c.o:
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) $(DEBUG) $(INCLUDE) -c $< -o $@
 
 mlx_clone:
 	if [ ! -d "$(MLXDIR)" ]; then \

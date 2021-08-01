@@ -6,33 +6,33 @@ void
 	char	*dst;
 
 	dst = screen->addr + (y * screen->line_length + x * (screen->bpp / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 t_complex
 	square_complex(t_complex z)
 {
-	t_complex	res;
+	t_complex	squared;
 
-	res.r = pow(z.r, 2.0) - pow(z.i, 2.0);
-	res.i = 2.0 * z.r * z.i;
-	return (res);
+	squared.real = pow(z.real, 2.0) - pow(z.imag, 2.0);
+	squared.imag = 2.0 * z.real * z.imag;
+	return (squared);
 }
 
 t_complex
 	add_complex(t_complex z, t_complex c)
 {
-	t_complex	res;
+	t_complex	added;
 
-	res.r = z.r + c.r;
-	res.i = z.i + c.i;
-	return (res);
+	added.real = z.real + c.real;
+	added.imag = z.imag + c.imag;
+	return (added);
 }
 
 double
 	get_modulus(t_complex z)
 {
-	return (pow(z.r, 2.0) + pow(z.i, 2.0));
+	return (pow(z.real, 2.0) + pow(z.imag, 2.0));
 }
 
 t_bool
@@ -45,53 +45,119 @@ t_bool
 	{
 		z = square_complex(z);
 		z = add_complex(z, c);
-		if (get_modulus(z) > THRESHOLD_RADIUS)
+		if (get_modulus(z) > pow(THRESHOLD_RADIUS, 2.0))
 			return (FALSE);
 		i++;
 	}
 	return (TRUE);
 }
 
-int
-	main(int ac, char **av)
+char
+	*set_title(const char type)
 {
-	void			*mlx;
-	void			*mlx_win;
-	static int		width = 1000;
-	static int		height = 1000;
-	t_screen		screen;
-	int				col;
-	int				row;
-	t_complex		c;
-	t_complex		z;
+	if (type == 'j')
+		return (SCREEN_TITLE_JULIA);
+	else if (type == 'm')
+		return (SCREEN_TITLE_MANDELBROT);
+	else
+		return (NULL);
+}
 
+t_bool
+	init_fractol(t_fractol *fractol, int ac, char **av)
+{
 	(void)ac;
-	c.r = atof(av[1]);
-	c.i = atof(av[2]);
-	mlx = mlx_init();
-	if (!mlx)
-		return (1);
-	mlx_win = mlx_new_window(mlx, width, height, "Hellow world!");
-	if (!mlx_win)
-		return (1);
-	screen.img = mlx_new_image(mlx, width, height);
-	if (!screen.img)
-		return (1);
-	screen.addr = mlx_get_data_addr(screen.img, &screen.bpp, &screen.line_length, &screen.endian);
+	fractol->type = *av[1];
+	fractol->mlx = mlx_init();
+	if (!fractol->mlx)
+		return (FALSE);
+	(fractol->screen).width = atoi(av[2]);
+	(fractol->screen).height = atoi(av[3]);
+	(fractol->screen).title = set_title(fractol->type);
+	(fractol->screen).mlx_win = mlx_new_window(fractol->mlx,
+			(fractol->screen).width, (fractol->screen).height,
+			(fractol->screen).title);
+	if (!((fractol->screen).mlx_win))
+		return (FALSE);
+	(fractol->screen).img = mlx_new_image(fractol->mlx,
+			(fractol->screen).width, (fractol->screen).height);
+	if (!((fractol->screen).img))
+		return (FALSE);
+	(fractol->screen).addr = mlx_get_data_addr((fractol->screen).img,
+			&(fractol->screen).bpp, &(fractol->screen).line_length,
+			&(fractol->screen).endian);
+	if (!((fractol->screen).addr))
+		return (FALSE);
+	return (TRUE);
+}
+
+/* need to update */
+
+t_bool
+	check_input(int ac, char **av)
+{
+	(void)ac;
+	(void)av;
+	return (TRUE);
+}
+
+/* need to update */
+
+void
+	exit_with_error(void)
+{
+	exit(1);
+}
+
+void
+	draw_julia(t_fractol fractol, t_complex c)
+{
+	int			col;
+	int			row;
+	t_complex	z;
+
 	col = 0;
-	while (col < width)
+	while (col < fractol.screen.width)
 	{
 		row = 0;
-		while (row < height)
+		while (row < fractol.screen.height)
 		{
-			z.r = -2.0 + 4.0 * (double)col / (double)width;
-			z.i = 2.0 - 4.0 * (double)row / (double)width;
+			z.real = -2.0 + 4.0 * (double)col / (double)fractol.screen.width;
+			z.imag = 2.0 - 4.0 * (double)row / (double)fractol.screen.height;
 			if (check_conversion(z, c))
-				mlx_pixel_put_screen(&screen, col, row, 0x000000FF);
+				mlx_pixel_put_screen(&(fractol.screen), col, row, 0x000000FF);
 			row++;
 		}
 		col++;
 	}
-	mlx_put_image_to_window(mlx, mlx_win, screen.img, 0, 0);
-	mlx_loop(mlx);
+}
+
+/* need to update */
+
+void
+	draw_mandelbrot(t_fractol fractal, t_complex c)
+{
+	(void)fractal;
+	(void)c;
+}
+
+int
+	main(int ac, char **av)
+{
+	t_fractol		fractol;
+	t_complex		c;
+
+	if (!check_input(ac, av))
+		exit_with_error();
+	if (!init_fractol(&fractol, ac, av))
+		exit_with_error();
+	c.real = atof(av[4]);
+	c.imag = atof(av[5]);
+	if (fractol.type == 'j')
+		draw_julia(fractol, c);
+	else if (fractol.type == 'm')
+		draw_mandelbrot(fractol, c);
+	mlx_put_image_to_window(fractol.mlx, fractol.screen.mlx_win,
+		fractol.screen.img, 0, 0);
+	mlx_loop(fractol.mlx);
 }

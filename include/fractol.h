@@ -8,9 +8,21 @@
 
 # define MAX_ITERATION 50
 # define THRESHOLD_RADIUS 2.0
+# define SCREEN_TITLE_JULIA "Julia set"
+# define SCREEN_TITLE_MANDELBROT "Mandelbrot set"
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
 
 typedef struct s_screen
 {
+	void	*mlx_win;
+	int		width;
+	int		height;
+	char	*title;
 	void	*img;
 	char	*addr;
 	int		bpp;
@@ -18,16 +30,17 @@ typedef struct s_screen
 	int		endian;
 }	t_screen;
 
+typedef struct s_fractol
+{
+	char		type;
+	void		*mlx;
+	t_screen	screen;
+}	t_fractol;
+
 typedef struct s_complex
 {
-	double	r;
-	double	i;
+	double	real;
+	double	imag;
 }	t_complex;
-
-typedef enum e_bool
-{
-	FALSE,
-	TRUE
-}	t_bool;
 
 #endif

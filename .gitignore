@@ -1,6 +1,9 @@
 # Project executable
 fractol
 
+# mlx related files
+mlx/*
+
 # General
 .DS_Store
 

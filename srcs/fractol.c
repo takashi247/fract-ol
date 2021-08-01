@@ -79,5 +79,7 @@ int
 		fractol.screen.img, 0, 0);
 	mlx_hook(fractol.screen.mlx_win, CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK,
 		ft_close_fractol, &fractol);
+	mlx_hook(fractol.screen.mlx_win, KEY_PRESS, KEY_PRESS_MASK, ft_key_press,
+		&fractol);
 	mlx_loop(fractol.mlx);
 }

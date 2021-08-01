@@ -21,7 +21,29 @@
 # define POINTER_MOTION_MASK 1L << 6
 # define STRUCTURE_NOTIFY_MASK 1L << 17
 
-/* X11 events */
+/*
+** Keyboard LETTERS
+*/
+
+# define K_A 0x61
+# define K_D 0x64
+# define K_S 0x73
+# define K_W 0x77
+
+/*
+** Keyboard ARROWS and ESC
+*/
+
+# define K_AR_U 0xff52
+# define K_AR_D 0xff54
+# define K_AR_L 0xff51
+# define K_AR_R 0xff53
+# define K_ESC 0xff1b
+
+/*
+** X11 events
+** CLIENT_MESSAGE is used for
+*/
 
 typedef enum e_events
 {
@@ -76,6 +98,7 @@ double		ft_get_modulus(t_complex z);
 /* util_mlx.c */
 void		ft_mlx_pixel_put_screen(t_screen *screen, int x, int y, int color);
 int			ft_close_fractol(t_fractol *fractol);
+int			ft_key_press(int key, t_fractol *fractol);
 
 /* draw_mandelbrot.c */
 void		ft_draw_mandelbrot(t_fractol fractal);

@@ -39,7 +39,7 @@ t_bool
 	return (TRUE);
 }
 
-/* need to update */
+// need to update
 
 t_bool
 	check_input(int ac, char **av)
@@ -49,7 +49,7 @@ t_bool
 	return (TRUE);
 }
 
-/* need to update */
+// need to update
 
 void
 	exit_with_error(void)
@@ -67,10 +67,12 @@ int
 		exit_with_error();
 	if (!init_fractol(&fractol, ac, av))
 		exit_with_error();
-	c.real = atof(av[4]);
-	c.imag = atof(av[5]);
 	if (fractol.type == 'j')
+	{
+		c.real = atof(av[4]);
+		c.imag = atof(av[5]);
 		ft_draw_julia(fractol, c);
+	}
 	else if (fractol.type == 'm')
 		ft_draw_mandelbrot(fractol);
 	mlx_put_image_to_window(fractol.mlx, fractol.screen.mlx_win,

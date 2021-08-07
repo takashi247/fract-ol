@@ -8,7 +8,8 @@ SRCS		:= draw_julia.c \
 				draw_mandelbrot.c \
 				fractol.c \
 				util_complex.c \
-				util_mlx.c
+				util_mlx.c \
+				set_color.c
 
 SRCSDIR		:= ./srcs/
 
@@ -19,14 +20,17 @@ OBJS		:= $(SRCS:.c=.o)
 MLXDIR		:= ./mlx/
 MLXGITPATH	:= https://github.com/42Paris/minilibx-linux.git
 
+LIBDIR		:= ./libft
+LIBPATH		:= $(LIBDIR)/libft.a
+
 ifeq ($(shell uname),Linux)
-INCLUDE		:= -I$(MLXDIR) -I./include
+INCLUDE		:= -I$(MLXDIR) -I./include -I./libft/
 
-LIBRARY		:= -L$(MLXDIR) -lmlx_linux -lXext -lX11 -lm -lz
+LIBRARY		:= -L$(MLXDIR) -lmlx_linux -lXext -lX11 -lm -lz -L$(LIBDIR) -lft
 else
-INCLUDE		:= -I$(MLXDIR) -I/usr/X11/include -I/usr/X11R6/include -I./include
+INCLUDE		:= -I$(MLXDIR) -I/usr/X11/include -I/usr/X11R6/include -I./include -I./libft/
 
-LIBRARY		:= -L/usr/X11R6/lib -L$(MLXDIR) -lmlx -lX11 -lXext -framework OpenGL -framework AppKit
+LIBRARY		:= -L/usr/X11R6/lib -L$(MLXDIR) -lmlx -lX11 -lXext -L$(LIBDIR) -lft -framework OpenGL -framework AppKit
 endif
 
 RM			:= rm -f
@@ -36,11 +40,14 @@ DEBUG		:= -g -fsanitize=address
 
 all:		mlx_clone $(NAME)
 
-$(NAME):	$(OBJS)
+$(NAME):	$(OBJS) $(LIBPATH)
 	$(CC) $(CFLAGS) $(DEBUG) $(INCLUDE) $^ $(LIBRARY) -o $@
 
 .c.o:
 	$(CC) $(CFLAGS) $(DEBUG) $(INCLUDE) -c $< -o $@
+
+$(LIBPATH):
+	$(MAKE) plus -C $(LIBDIR)
 
 mlx_clone:
 	if [ ! -d "$(MLXDIR)" ]; then \

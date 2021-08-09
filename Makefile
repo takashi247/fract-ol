@@ -35,8 +35,8 @@ endif
 
 RM			:= rm -f
 
-# DEBUG 		:=
-DEBUG		:= -g -fsanitize=address
+DEBUG 		:=
+# DEBUG		:= -g -fsanitize=address
 
 all:		mlx_clone $(NAME)
 

@@ -1,6 +1,6 @@
 #include "fractol.h"
 
-char
+static char
 	*set_title(const char type)
 {
 	if (type == 'j')
@@ -11,7 +11,7 @@ char
 		return (NULL);
 }
 
-t_bool
+static t_bool
 	init_fractol(t_fractol *fractol, int ac, char **av)
 {
 	(void)ac;
@@ -41,20 +41,35 @@ t_bool
 
 // need to update
 
-t_bool
+static t_bool
 	check_input(int ac, char **av)
 {
-	(void)ac;
-	(void)av;
-	return (TRUE);
+	if (4 <= ac && av[1][0] == 'm')
+		return (TRUE);
+	else if (6 <= ac && av[1][0] == 'j')
+		return (TRUE);
+	else
+		return (FALSE);
 }
 
-// need to update
-
-void
-	exit_with_error(void)
+static void
+	exit_with_instruction(void)
 {
-	exit(1);
+	const int	fd = open(PATH_TO_README, O_RDONLY);
+	int			len;
+	char		buf[BUF_SIZE];
+
+	if (fd < 0)
+		exit(1);
+	while (1)
+	{
+		len = read(fd, buf, BUF_SIZE);
+		if (!len)
+			break ;
+		write(STDOUT_FILENO, buf, len);
+	}
+	close(fd);
+	exit(0);
 }
 
 int
@@ -64,9 +79,9 @@ int
 	t_complex		c;
 
 	if (!check_input(ac, av))
-		exit_with_error();
+		exit_with_instruction();
 	if (!init_fractol(&fractol, ac, av))
-		exit_with_error();
+		exit_with_instruction();
 	if (fractol.type == 'j')
 	{
 		c.real = atof(av[4]);

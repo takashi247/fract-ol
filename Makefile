@@ -4,12 +4,12 @@ CC			:= gcc
 
 CFLAGS		:= -Wall -Wextra -Werror
 
-SRCS		:= draw_julia.c \
-				draw_mandelbrot.c \
+SRCS		:= draw_fractal.c \
 				fractol.c \
 				util_complex.c \
 				util_mlx.c \
-				util_color.c
+				util_color.c \
+				zoom.c
 
 SRCSDIR		:= ./srcs/
 
@@ -26,7 +26,7 @@ LIBPATH		:= $(LIBDIR)/libft.a
 ifeq ($(shell uname),Linux)
 INCLUDE		:= -I$(MLXDIR) -I./include -I./libft/
 
-LIBRARY		:= -L$(MLXDIR) -lmlx_linux -lXext -lX11 -lm -lz -L$(LIBDIR) -lft
+LIBRARY		:= -L$(MLXDIR) -lmlx -lXext -lX11 -lm -lz -L$(LIBDIR) -lft
 else
 INCLUDE		:= -I$(MLXDIR) -I/usr/X11/include -I/usr/X11R6/include -I./include -I./libft/
 
@@ -52,17 +52,21 @@ $(LIBPATH):
 mlx_clone:
 	if [ ! -d "$(MLXDIR)" ]; then \
 		git clone $(MLXGITPATH) $(MLXDIR); \
-		$(MAKE) -C mlx/; \
-	fi;
+	fi; \
+	$(MAKE) -C $(MLXDIR);
 
 clean:
 	$(RM) $(OBJS)
+	$(MAKE) clean -C $(LIBDIR)
+	$(MAKE) clean -C $(MLXDIR)
+
 
 mlx_clean:
 	$(RM) -r $(MLXDIR)
 
 fclean:		clean
 	$(RM) $(NAME)
+	$(MAKE) fclean -C $(LIBDIR)
 
 re:			fclean all
 

@@ -1,6 +1,9 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
+// for debug
+# include <stdio.h>
+
 /* required header files */
 # include "mlx.h"
 # include <math.h>
@@ -13,12 +16,16 @@
 /* for read */
 # include <unistd.h>
 
-# define MAX_ITERATION 100
-# define THRESHOLD_RADIUS 100000.0
-# define SCREEN_TITLE_JULIA "Julia set"
-# define SCREEN_TITLE_MANDELBROT "Mandelbrot set"
+# define MAX_ITERATION 20
+# define THRESHOLD_RADIUS 2.0
+# define SCREEN_TITLE "fract-ol"
 # define PATH_TO_README "./tools/readme.txt"
 # define BUF_SIZE 1024
+# define MIN_REAL -2.5
+# define MIN_IMAG -2.5
+# define MAX_REAL 2.5
+# define MAX_IMAG 2.5
+# define ZOOM_FACTOR 0.9
 
 /*
 ** X11 masks
@@ -27,6 +34,8 @@
 ** button press: (1L << 2) = 4
 ** button release: (1L << 3) = 8
 ** pointer motion: (1L << 6) = 64
+** button 4 motion mask (mouse wheel zoom in): (1L << 11) = 2048
+** button 5 motion mast (mouse wheel zoom out): (1L << 12) = 4096
 ** structure notify: (1L << 17) = 131072
 */
 
@@ -57,6 +66,13 @@
 # define K_ESC 0xff1b
 
 /*
+** mouse buttons
+*/
+
+# define MOUSE_ZOOM_OUT 4
+# define MOUSE_ZOOM_IN 5
+
+/*
 ** X11 events
 ** CLIENT_MESSAGE is used for
 */
@@ -82,7 +98,6 @@ typedef struct s_screen
 	void	*mlx_win;
 	int		width;
 	int		height;
-	char	*title;
 	void	*img;
 	char	*addr;
 	int		bpp;
@@ -90,21 +105,23 @@ typedef struct s_screen
 	int		endian;
 }	t_screen;
 
-typedef struct s_fractol
-{
-	char		type;
-	void		*mlx;
-	t_screen	screen;
-}	t_fractol;
-
 typedef struct s_complex
 {
 	double	real;
 	double	imag;
 }	t_complex;
 
-/* draw_julia.c */
-void		ft_draw_julia(t_fractol fractol, t_complex c);
+typedef struct s_fractol
+{
+	char		type;
+	void		*mlx;
+	double		min_real;
+	double		max_real;
+	double		min_imag;
+	double		max_imag;
+	t_complex	c;
+	t_screen	screen;
+}	t_fractol;
 
 /* util_complex.c */
 t_complex	ft_square_complex(t_complex z);
@@ -117,11 +134,14 @@ int			ft_close_fractol(t_fractol *fractol);
 int			ft_key_press(int key, t_fractol *fractol);
 int			ft_create_rgb(int r, int g, int b);
 
-/* draw_mandelbrot.c */
-void		ft_draw_mandelbrot(t_fractol fractal);
+/* draw_fractal.c */
+void		ft_draw_fractal(t_fractol fractal);
 
 /* util_color.c */
 int			ft_count_iteration(t_complex z, t_complex c);
 int			ft_get_color(int num_iteration);
+
+/* zoom.c */
+int			ft_zoom_w_mouse(int button, int x, int y, t_fractol *fractol);
 
 #endif

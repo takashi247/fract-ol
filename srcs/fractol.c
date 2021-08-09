@@ -85,5 +85,7 @@ int
 		&fractol);
 	mlx_hook(fractol.screen.mlx_win, BUTTON_PRESS, BUTTON_PRESS_MASK,
 		ft_zoom_w_mouse, &fractol);
+	mlx_hook(fractol.screen.mlx_win, FOCUS_IN, FOCUS_CHANGE_MASK,
+		ft_put_image_to_window, &fractol);
 	mlx_loop(fractol.mlx);
 }

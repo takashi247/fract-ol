@@ -31,9 +31,8 @@
 ** button press: (1L << 2) = 4
 ** button release: (1L << 3) = 8
 ** pointer motion: (1L << 6) = 64
-** button 4 motion mask (mouse wheel zoom in): (1L << 11) = 2048
-** button 5 motion mast (mouse wheel zoom out): (1L << 12) = 4096
 ** structure notify: (1L << 17) = 131072
+** focus change mask: (1L << 21) = 2097152
 */
 
 # define KEY_PRESS_MASK 1
@@ -42,6 +41,7 @@
 # define BUTTON_RELEASE_MASK 8
 # define POINTER_MOTION_MASK 64
 # define STRUCTURE_NOTIFY_MASK 131072
+# define FOCUS_CHANGE_MASK 2097152
 
 /*
 ** Keyboard LETTERS
@@ -81,6 +81,7 @@ typedef enum e_events
 	BUTTON_PRESS = 4,
 	BUTTON_RELEASE = 5,
 	MOTION_NOTIFY = 6,
+	FOCUS_IN = 9,
 	CLIENT_MESSAGE = 33
 }	t_events;
 
@@ -130,6 +131,7 @@ void		ft_mlx_pixel_put_screen(t_screen *screen, int x, int y, int color);
 int			ft_close_fractol(t_fractol *fractol);
 int			ft_key_press(int key, t_fractol *fractol);
 int			ft_create_rgb(int r, int g, int b);
+int			ft_put_image_to_window(t_fractol *fractol);
 
 /* draw_fractal.c */
 void		ft_draw_fractal(t_fractol fractal);

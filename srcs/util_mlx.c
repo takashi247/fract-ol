@@ -6,6 +6,13 @@ int
 	return (0 << 24 | r << 16 | g << 8 | b);
 }
 
+int
+	ft_put_image_to_window(t_fractol *fractol)
+{
+	return (mlx_put_image_to_window(fractol->mlx, fractol->screen.mlx_win,
+			fractol->screen.img, 0, 0));
+}
+
 void
 	ft_mlx_pixel_put_screen(t_screen *screen, int x, int y, int color)
 {

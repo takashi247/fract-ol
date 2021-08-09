@@ -7,11 +7,18 @@
 # include <stdlib.h>
 # include "libft.h"
 
+/* for open */
+# include <fcntl.h>
+
+/* for read */
+# include <unistd.h>
+
 # define MAX_ITERATION 100
 # define THRESHOLD_RADIUS 100000.0
 # define SCREEN_TITLE_JULIA "Julia set"
 # define SCREEN_TITLE_MANDELBROT "Mandelbrot set"
-# define BLUE 0x000000FF
+# define PATH_TO_README "./tools/readme.txt"
+# define BUF_SIZE 1024
 
 /*
 ** X11 masks

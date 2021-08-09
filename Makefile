@@ -9,7 +9,7 @@ SRCS		:= draw_julia.c \
 				fractol.c \
 				util_complex.c \
 				util_mlx.c \
-				set_color.c
+				util_color.c
 
 SRCSDIR		:= ./srcs/
 
@@ -66,4 +66,6 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re mlx_clone mlx_clean
+bonus:		all
+
+.PHONY:		all clean fclean re mlx_clone mlx_clean bonus

@@ -3,23 +3,32 @@
 
 /* required header files */
 # include "mlx.h"
-# include "math.h"
-# include "stdlib.h"
+# include <math.h>
+# include <stdlib.h>
+# include "libft.h"
 
-# define MAX_ITERATION 50
-# define THRESHOLD_RADIUS 2.0
+# define MAX_ITERATION 100
+# define THRESHOLD_RADIUS 100000.0
 # define SCREEN_TITLE_JULIA "Julia set"
 # define SCREEN_TITLE_MANDELBROT "Mandelbrot set"
 # define BLUE 0x000000FF
 
-/* X11 masks */
+/*
+** X11 masks
+** key press: (1L << 0) = 1
+** key release: (1L << 1) = 2
+** button press: (1L << 2) = 4
+** button release: (1L << 3) = 8
+** pointer motion: (1L << 6) = 64
+** structure notify: (1L << 17) = 131072
+*/
 
-# define KEY_PRESS_MASK 1L << 0
-# define KEY_RELEASE_MASK 1L << 1
-# define BUTTON_PRESS_MASK 1L << 2
-# define BUTTON_RELEASE_MASK 1L << 3
-# define POINTER_MOTION_MASK 1L << 6
-# define STRUCTURE_NOTIFY_MASK 1L << 17
+# define KEY_PRESS_MASK 1
+# define KEY_RELEASE_MASK 2
+# define BUTTON_PRESS_MASK 4
+# define BUTTON_RELEASE_MASK 8
+# define POINTER_MOTION_MASK 64
+# define STRUCTURE_NOTIFY_MASK 131072
 
 /*
 ** Keyboard LETTERS
@@ -99,8 +108,13 @@ double		ft_get_modulus(t_complex z);
 void		ft_mlx_pixel_put_screen(t_screen *screen, int x, int y, int color);
 int			ft_close_fractol(t_fractol *fractol);
 int			ft_key_press(int key, t_fractol *fractol);
+int			ft_create_rgb(int r, int g, int b);
 
 /* draw_mandelbrot.c */
 void		ft_draw_mandelbrot(t_fractol fractal);
+
+/* util_color.c */
+int			ft_count_iteration(t_complex z, t_complex c);
+int			ft_get_color(int num_iteration);
 
 #endif

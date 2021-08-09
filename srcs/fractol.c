@@ -1,30 +1,25 @@
 #include "fractol.h"
 
-static char
-	*set_title(const char type)
-{
-	if (type == 'j')
-		return (SCREEN_TITLE_JULIA);
-	else if (type == 'm')
-		return (SCREEN_TITLE_MANDELBROT);
-	else
-		return (NULL);
-}
-
 static t_bool
-	init_fractol(t_fractol *fractol, int ac, char **av)
+	init_fractol(t_fractol *fractol, char **av)
 {
-	(void)ac;
 	fractol->type = *av[1];
+	fractol->min_real = MIN_REAL;
+	fractol->max_real = MAX_REAL;
+	fractol->min_imag = MIN_IMAG;
+	fractol->max_imag = MAX_IMAG;
+	if (fractol->type == 'j')
+	{
+		fractol->c.real = atof(av[4]);
+		fractol->c.imag = atof(av[5]);
+	}
 	fractol->mlx = mlx_init();
 	if (!fractol->mlx)
 		return (FALSE);
 	(fractol->screen).width = atoi(av[2]);
 	(fractol->screen).height = atoi(av[3]);
-	(fractol->screen).title = set_title(fractol->type);
 	(fractol->screen).mlx_win = mlx_new_window(fractol->mlx,
-			(fractol->screen).width, (fractol->screen).height,
-			(fractol->screen).title);
+			(fractol->screen).width, (fractol->screen).height, SCREEN_TITLE);
 	if (!((fractol->screen).mlx_win))
 		return (FALSE);
 	(fractol->screen).img = mlx_new_image(fractol->mlx,
@@ -76,25 +71,19 @@ int
 	main(int ac, char **av)
 {
 	t_fractol		fractol;
-	t_complex		c;
 
 	if (!check_input(ac, av))
 		exit_with_instruction();
-	if (!init_fractol(&fractol, ac, av))
+	if (!init_fractol(&fractol, av))
 		exit_with_instruction();
-	if (fractol.type == 'j')
-	{
-		c.real = atof(av[4]);
-		c.imag = atof(av[5]);
-		ft_draw_julia(fractol, c);
-	}
-	else if (fractol.type == 'm')
-		ft_draw_mandelbrot(fractol);
+	ft_draw_fractal(fractol);
 	mlx_put_image_to_window(fractol.mlx, fractol.screen.mlx_win,
 		fractol.screen.img, 0, 0);
 	mlx_hook(fractol.screen.mlx_win, CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK,
 		ft_close_fractol, &fractol);
 	mlx_hook(fractol.screen.mlx_win, KEY_PRESS, KEY_PRESS_MASK, ft_key_press,
 		&fractol);
+	mlx_hook(fractol.screen.mlx_win, BUTTON_PRESS, BUTTON_PRESS_MASK,
+		ft_zoom_w_mouse, &fractol);
 	mlx_loop(fractol.mlx);
 }

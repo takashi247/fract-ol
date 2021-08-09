@@ -1,9 +1,6 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-// for debug
-# include <stdio.h>
-
 /* required header files */
 # include "mlx.h"
 # include <math.h>

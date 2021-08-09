@@ -141,4 +141,10 @@ int			ft_get_color(int num_iteration);
 /* zoom.c */
 int			ft_zoom_w_mouse(int button, int x, int y, t_fractol *fractol);
 
+/* shift_window.c */
+int			ft_shift_window_up(t_fractol *fractol);
+int			ft_shift_window_down(t_fractol *fractol);
+int			ft_shift_window_right(t_fractol *fractol);
+int			ft_shift_window_left(t_fractol *fractol);
+
 #endif

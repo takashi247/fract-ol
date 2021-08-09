@@ -38,12 +38,12 @@ int
 	else if (key == K_D)
 		return (0);
 	else if (key == K_AR_U)
-		return (0);
+		return (ft_shift_window_up(fractol));
 	else if (key == K_AR_D)
-		return (0);
+		return (ft_shift_window_down(fractol));
 	else if (key == K_AR_L)
-		return (0);
+		return (ft_shift_window_left(fractol));
 	else if (key == K_AR_R)
-		return (0);
+		return (ft_shift_window_right(fractol));
 	return (0);
 }

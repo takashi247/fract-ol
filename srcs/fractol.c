@@ -10,8 +10,8 @@ static t_bool
 	fractol->max_imag = MAX_IMAG;
 	if (fractol->type == 'j')
 	{
-		fractol->c.real = atof(av[4]);
-		fractol->c.imag = atof(av[5]);
+		fractol->c.real = ft_atof(av[4]);
+		fractol->c.imag = ft_atof(av[5]);
 	}
 	fractol->mlx = mlx_init();
 	if (!fractol->mlx)

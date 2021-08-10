@@ -59,7 +59,9 @@ mlx_clone:
 clean:
 	$(RM) $(OBJS)
 	$(MAKE) clean -C $(LIBDIR)
-	$(MAKE) clean -C $(MLXDIR)
+	if [ -d "$(MLXDIR)" ]; then \
+		$(MAKE) clean -C $(MLXDIR); \
+	fi;
 
 
 mlx_clean:
@@ -67,7 +69,9 @@ mlx_clean:
 
 fclean:		clean
 	$(RM) $(NAME)
-	$(MAKE) fclean -C $(LIBDIR)
+	if [ -d "$(MLXDIR)" ]; then \
+		$(MAKE) fclean -C $(LIBDIR); \
+	fi;
 
 re:			fclean all
 

@@ -20,7 +20,7 @@ int
 static int
 	convert_hsv_to_rgb(int hue, int satulation, int value)
 {
-	const int		hi = ((int)(hue * 360 / 255 / 60)) % 6;
+	const int		hi = (hue * 360 / 255 / 60) % 6;
 	const double	f = hue * 360 / 255 / 60 - hi;
 	const int		p = (int)(value * (1 - satulation) / 255);
 	const int		q = (int)(value * (1 - f * satulation) / 255);

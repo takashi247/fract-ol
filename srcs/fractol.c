@@ -8,6 +8,8 @@ static t_bool
 	fractol->max_real = MAX_REAL;
 	fractol->min_imag = MIN_IMAG;
 	fractol->max_imag = MAX_IMAG;
+	fractol->is_value_shift_mode = TRUE;
+	fractol->base_hue = BLUE;
 	if (fractol->type == 'j')
 	{
 		fractol->c.real = ft_atof(av[2]);
@@ -37,9 +39,9 @@ static t_bool
 static t_bool
 	check_input(int ac, char **av)
 {
-	if (2 <= ac && av[1][0] == 'm')
+	if (2 <= ac && !ft_strncmp(av[1], "m", 2))
 		return (TRUE);
-	else if (4 <= ac && av[1][0] == 'j')
+	else if (4 <= ac && !ft_strncmp(av[1], "j", 2))
 		return (TRUE);
 	else
 		return (FALSE);

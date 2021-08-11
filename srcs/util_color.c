@@ -41,7 +41,7 @@ static int
 }
 
 int
-	ft_get_color(int num_iteration, int max_iteration)
+	ft_get_color_h(int num_iteration, int max_iteration)
 {
 	const int	hue = (int)(255 * num_iteration / max_iteration);
 	const int	satulation = 255;
@@ -51,5 +51,21 @@ int
 		value = 255;
 	else
 		value = 0;
+	return (convert_hsv_to_rgb(hue, satulation, value));
+}
+
+int
+	ft_get_color_v(int num_iteration, int base_hue, int max_iteration)
+{
+	const int	hue = base_hue;
+	const int	satulation = 0;
+	int			value;
+
+	if (!num_iteration)
+		num_iteration++;
+	if (num_iteration < max_iteration)
+		value = (int)(255 * num_iteration / max_iteration);
+	else
+		return (0);
 	return (convert_hsv_to_rgb(hue, satulation, value));
 }

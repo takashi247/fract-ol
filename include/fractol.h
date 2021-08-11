@@ -50,10 +50,10 @@
 ** Keyboard LETTERS
 */
 
-# define K_A 0x61
-# define K_D 0x64
-# define K_S 0x73
-# define K_W 0x77
+# define K_C 0x63
+# define K_R 0x72
+# define K_G 0x67
+# define K_B 0x62
 
 /*
 ** Keyboard ARROWS and ESC
@@ -94,6 +94,15 @@ typedef enum e_bool
 	TRUE
 }	t_bool;
 
+/* hue values */
+
+typedef enum e_hue
+{
+	RED = 0,
+	GREEN = 85,
+	BLUE = 170
+}	t_hue;
+
 typedef struct s_screen
 {
 	void	*mlx_win;
@@ -113,6 +122,8 @@ typedef struct s_complex
 typedef struct s_fractol
 {
 	char		type;
+	t_bool		is_value_shift_mode;
+	int			base_hue;
 	void		*mlx;
 	double		min_real;
 	double		max_real;
@@ -139,7 +150,8 @@ void		ft_draw_fractal(t_fractol fractal);
 
 /* util_color.c */
 int			ft_count_iteration(t_complex z, t_complex c, int max_iteration);
-int			ft_get_color(int num_iteration, int max_iteration);
+int			ft_get_color_h(int num_iteration, int max_iteration);
+int			ft_get_color_v(int num_iteration, int base_hue, int max_iteration);
 
 /* zoom.c */
 int			ft_zoom_w_mouse(int button, int x, int y, t_fractol *fractol);
@@ -149,5 +161,11 @@ int			ft_shift_window_up(t_fractol *fractol);
 int			ft_shift_window_down(t_fractol *fractol);
 int			ft_shift_window_right(t_fractol *fractol);
 int			ft_shift_window_left(t_fractol *fractol);
+
+/* change_color.c */
+int			ft_make_red(t_fractol *fractol);
+int			ft_make_green(t_fractol *fractol);
+int			ft_make_blue(t_fractol *fractol);
+int			ft_change_color_mode(t_fractol *fractol);
 
 #endif

@@ -36,14 +36,14 @@ int
 {
 	if (key == K_ESC)
 		ft_close_fractol(fractol);
-	else if (key == K_W)
-		return (0);
-	else if (key == K_A)
-		return (0);
-	else if (key == K_S)
-		return (0);
-	else if (key == K_D)
-		return (0);
+	else if (key == K_C)
+		return (ft_change_color_mode(fractol));
+	else if (key == K_R)
+		return (ft_make_red(fractol));
+	else if (key == K_G)
+		return (ft_make_green(fractol));
+	else if (key == K_B)
+		return (ft_make_blue(fractol));
 	else if (key == K_AR_U)
 		return (ft_shift_window_up(fractol));
 	else if (key == K_AR_D)

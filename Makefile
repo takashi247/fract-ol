@@ -10,7 +10,8 @@ SRCS		:= draw_fractal.c \
 				util_mlx.c \
 				util_color.c \
 				zoom.c \
-				shift_window.c
+				shift_window.c \
+				change_color.c
 
 SRCSDIR		:= ./srcs/
 

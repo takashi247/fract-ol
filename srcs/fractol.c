@@ -57,10 +57,11 @@ static t_bool
 static void
 	exit_with_instruction(void)
 {
-	const int	fd = open(PATH_TO_README, O_RDONLY);
+	int			fd;
 	int			len;
 	char		buf[BUF_SIZE];
 
+	fd = open(PATH_TO_README, O_RDONLY);
 	if (fd < 0)
 		exit(1);
 	while (1)
@@ -95,4 +96,5 @@ int
 	mlx_hook(fractol.screen.mlx_win, FOCUS_IN, FOCUS_CHANGE_MASK,
 		ft_put_image_to_window, &fractol);
 	mlx_loop(fractol.mlx);
+	return (0);
 }

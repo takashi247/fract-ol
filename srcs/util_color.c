@@ -17,6 +17,25 @@ int
 	return (num_iteration);
 }
 
+int
+	ft_count_iteration_b(t_complex z, t_complex c, int max_iteration)
+{
+	int		num_iteration;
+	double	z_real_tmp;
+
+	num_iteration = 0;
+	while (num_iteration < max_iteration)
+	{
+		z_real_tmp = pow(z.real, 2.0) - pow(z.imag, 2.0) + c.real;
+		z.imag = fabs(2 * z.real * z.imag) + c.imag;
+		z.real = z_real_tmp;
+		if (ft_get_modulus(z) > THRESHOLD_RADIUS * THRESHOLD_RADIUS)
+			return (num_iteration);
+		num_iteration++;
+	}
+	return (num_iteration);
+}
+
 static int
 	convert_hsv_to_rgb(int hue, int satulation, int value)
 {

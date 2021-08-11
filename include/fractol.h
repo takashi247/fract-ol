@@ -17,6 +17,7 @@
 # define SCREEN_HEIGHT 800
 # define MAX_ITERATION_M 20
 # define MAX_ITERATION_J 100
+# define MAX_ITERATION_B 50
 # define THRESHOLD_RADIUS 2.0
 # define SCREEN_TITLE "fract-ol"
 # define PATH_TO_README "./tools/readme.txt"
@@ -152,6 +153,7 @@ void		ft_draw_fractal(t_fractol fractal);
 int			ft_count_iteration(t_complex z, t_complex c, int max_iteration);
 int			ft_get_color_h(int num_iteration, int max_iteration);
 int			ft_get_color_v(int num_iteration, int base_hue, int max_iteration);
+int			ft_count_iteration_b(t_complex z, t_complex c, int max_iteration);
 
 /* zoom.c */
 int			ft_zoom_w_mouse(int button, int x, int y, t_fractol *fractol);

@@ -1,6 +1,27 @@
 #include "fractol.h"
 
 static void
+	draw_burning_ship(t_fractol fractol, int col, int row)
+{
+	t_complex	z;
+	t_complex	c;
+	int			num_iteration;
+	int			color;
+
+	ft_bzero(&z, sizeof(t_complex));
+	c.real = fractol.min_real + (fractol.max_real - fractol.min_real)
+		* (double)col / (double)SCREEN_WIDTH;
+	c.imag = fractol.max_imag - (fractol.max_imag - fractol.min_imag)
+		* (double)row / (double)SCREEN_HEIGHT;
+	num_iteration = ft_count_iteration_b(z, c, MAX_ITERATION_B);
+	if (fractol.is_value_shift_mode)
+		color = ft_get_color_v(num_iteration, fractol.base_hue, MAX_ITERATION_B);
+	else
+		color = ft_get_color_h(num_iteration, MAX_ITERATION_B);
+	ft_mlx_pixel_put_screen(&(fractol.screen), col, row, color);
+}
+
+static void
 	draw_mandelbrot(t_fractol fractol, int col, int row)
 {
 	t_complex	z;
@@ -56,6 +77,8 @@ void
 				draw_julia(fractol, col, row);
 			else if (fractol.type == 'm')
 				draw_mandelbrot(fractol, col, row);
+			else if (fractol.type == 'b')
+				draw_burning_ship(fractol, col, row);
 			row++;
 		}
 		col++;

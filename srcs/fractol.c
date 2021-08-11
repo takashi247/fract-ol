@@ -41,6 +41,8 @@ static t_bool
 {
 	if (2 <= ac && !ft_strncmp(av[1], "m", 2))
 		return (TRUE);
+	else if (2 <= ac && !ft_strncmp(av[1], "b", 2))
+		return (TRUE);
 	else if (4 <= ac && !ft_strncmp(av[1], "j", 2))
 		return (TRUE);
 	else

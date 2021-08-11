@@ -1,15 +1,21 @@
 #include "fractol.h"
 
-static t_bool
-	init_fractol(t_fractol *fractol, char **av)
+static void
+	set_initial_values(t_fractol *fractol)
 {
-	fractol->type = *av[1];
 	fractol->min_real = MIN_REAL;
 	fractol->max_real = MAX_REAL;
 	fractol->min_imag = MIN_IMAG;
 	fractol->max_imag = MAX_IMAG;
 	fractol->is_value_shift_mode = TRUE;
 	fractol->base_hue = BLUE;
+}
+
+static t_bool
+	init_fractol(t_fractol *fractol, char **av)
+{
+	set_initial_values(fractol);
+	fractol->type = *av[1];
 	if (fractol->type == 'j')
 	{
 		fractol->c.real = ft_atof(av[2]);
@@ -34,8 +40,6 @@ static t_bool
 	return (TRUE);
 }
 
-// need to update
-
 static t_bool
 	check_input(int ac, char **av)
 {
@@ -43,7 +47,8 @@ static t_bool
 		return (TRUE);
 	else if (2 <= ac && !ft_strncmp(av[1], "b", 2))
 		return (TRUE);
-	else if (4 <= ac && !ft_strncmp(av[1], "j", 2))
+	else if (4 <= ac && !ft_strncmp(av[1], "j", 2) && ft_isnumeric(av[2])
+		&& ft_isnumeric(av[3]))
 		return (TRUE);
 	else
 		return (FALSE);

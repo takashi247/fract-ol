@@ -2,16 +2,25 @@
 
 [Usage]
 
-- Drawing mandelbrot set:
+- Draw mandelbrot set:
   ./fractol m
 
-- Drawing julia set:
+- Draw julia set:
   ./fractol j [real_part_of_c] [imag_part_of_c]
 
-[Key and mouse actions]
+- Draw burning ship:
+  ./fractol b
 
-- Mouse wheel: zoom in/out to the mouse position on the screen
+[Key actions]
 
-- Arrow keys: shift the displayed area
+- Arrow keys: Shift the displayed area
+
+- C: Toggle color mode
+
+- R/G/B: Change the base-hue to red/green/red respectively
+
+[Mouse actions]
+
+- Mouse wheel: Zoom in/out to the mouse position on the screen
 
 ---

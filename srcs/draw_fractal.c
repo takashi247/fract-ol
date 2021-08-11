@@ -11,18 +11,18 @@ static void
 
 	ft_bzero(&z, sizeof(t_complex));
 	col = 0;
-	while (col < fractol.screen.width)
+	while (col < SCREEN_WIDTH)
 	{
 		row = 0;
-		while (row < fractol.screen.height)
+		while (row < SCREEN_HEIGHT)
 		{
 			c.real = fractol.min_real + (fractol.max_real - fractol.min_real)
-				* (double)col / (double)fractol.screen.width;
+				* (double)col / (double)SCREEN_WIDTH;
 			c.imag = fractol.max_imag - (fractol.max_imag - fractol.min_imag)
-				* (double)row / (double)fractol.screen.height;
-			num_iteration = ft_count_iteration(z, c);
+				* (double)row / (double)SCREEN_HEIGHT;
+			num_iteration = ft_count_iteration(z, c, MAX_ITERATION_M);
 			ft_mlx_pixel_put_screen(&(fractol.screen), col, row,
-				ft_get_color(num_iteration));
+				ft_get_color(num_iteration, MAX_ITERATION_M));
 			row++;
 		}
 		col++;
@@ -38,18 +38,18 @@ static void
 	int			num_iteration;
 
 	col = 0;
-	while (col < fractol.screen.width)
+	while (col < SCREEN_WIDTH)
 	{
 		row = 0;
-		while (row < fractol.screen.height)
+		while (row < SCREEN_HEIGHT)
 		{
 			z.real = fractol.min_real + (fractol.max_real - fractol.min_real)
-				* (double)col / (double)fractol.screen.width;
+				* (double)col / SCREEN_WIDTH;
 			z.imag = fractol.max_imag - (fractol.max_imag - fractol.min_imag)
-				* (double)row / (double)fractol.screen.height;
-			num_iteration = ft_count_iteration(z, fractol.c);
+				* (double)row / SCREEN_HEIGHT;
+			num_iteration = ft_count_iteration(z, fractol.c, MAX_ITERATION_J);
 			ft_mlx_pixel_put_screen(&(fractol.screen), col, row,
-				ft_get_color(num_iteration));
+				ft_get_color(num_iteration, MAX_ITERATION_J));
 			row++;
 		}
 		col++;

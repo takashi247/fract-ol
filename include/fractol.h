@@ -13,7 +13,10 @@
 /* for read */
 # include <unistd.h>
 
-# define MAX_ITERATION 20
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 800
+# define MAX_ITERATION_M 20
+# define MAX_ITERATION_J 100
 # define THRESHOLD_RADIUS 2.0
 # define SCREEN_TITLE "fract-ol"
 # define PATH_TO_README "./tools/readme.txt"
@@ -94,8 +97,6 @@ typedef enum e_bool
 typedef struct s_screen
 {
 	void	*mlx_win;
-	int		width;
-	int		height;
 	void	*img;
 	char	*addr;
 	int		bpp;
@@ -137,8 +138,8 @@ int			ft_put_image_to_window(t_fractol *fractol);
 void		ft_draw_fractal(t_fractol fractal);
 
 /* util_color.c */
-int			ft_count_iteration(t_complex z, t_complex c);
-int			ft_get_color(int num_iteration);
+int			ft_count_iteration(t_complex z, t_complex c, int max_iteration);
+int			ft_get_color(int num_iteration, int max_iteration);
 
 /* zoom.c */
 int			ft_zoom_w_mouse(int button, int x, int y, t_fractol *fractol);

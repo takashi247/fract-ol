@@ -1,12 +1,12 @@
 #include "fractol.h"
 
 int
-	ft_count_iteration(t_complex z, t_complex c)
+	ft_count_iteration(t_complex z, t_complex c, int max_iteration)
 {
 	int	num_iteration;
 
 	num_iteration = 0;
-	while (num_iteration < MAX_ITERATION)
+	while (num_iteration < max_iteration)
 	{
 		z = ft_square_complex(z);
 		z = ft_add_complex(z, c);
@@ -41,13 +41,13 @@ static int
 }
 
 int
-	ft_get_color(int num_iteration)
+	ft_get_color(int num_iteration, int max_iteration)
 {
-	const int	hue = (int)(255 * num_iteration / MAX_ITERATION);
+	const int	hue = (int)(255 * num_iteration / max_iteration);
 	const int	satulation = 255;
 	int			value;
 
-	if (num_iteration < MAX_ITERATION)
+	if (num_iteration < max_iteration)
 		value = 255;
 	else
 		value = 0;

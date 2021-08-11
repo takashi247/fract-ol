@@ -26,9 +26,9 @@ int
 	ft_zoom_w_mouse(int button, int x, int y, t_fractol *fractol)
 {
 	const double	pos_x = fractol->min_real
-		+ (fractol->max_real - fractol->min_real) * x / fractol->screen.width;
+		+ (fractol->max_real - fractol->min_real) * x / SCREEN_WIDTH;
 	const double	pos_y = fractol->max_imag
-		- (fractol->max_imag - fractol->min_imag) * y / fractol->screen.height;
+		- (fractol->max_imag - fractol->min_imag) * y / SCREEN_HEIGHT;
 
 	if (button == MOUSE_ZOOM_IN)
 		zoom_in(pos_x, pos_y, fractol);

@@ -10,20 +10,18 @@ static t_bool
 	fractol->max_imag = MAX_IMAG;
 	if (fractol->type == 'j')
 	{
-		fractol->c.real = ft_atof(av[4]);
-		fractol->c.imag = ft_atof(av[5]);
+		fractol->c.real = ft_atof(av[2]);
+		fractol->c.imag = ft_atof(av[3]);
 	}
 	fractol->mlx = mlx_init();
 	if (!fractol->mlx)
 		return (FALSE);
-	(fractol->screen).width = atoi(av[2]);
-	(fractol->screen).height = atoi(av[3]);
 	(fractol->screen).mlx_win = mlx_new_window(fractol->mlx,
-			(fractol->screen).width, (fractol->screen).height, SCREEN_TITLE);
+			SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE);
 	if (!((fractol->screen).mlx_win))
 		return (FALSE);
 	(fractol->screen).img = mlx_new_image(fractol->mlx,
-			(fractol->screen).width, (fractol->screen).height);
+			SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!((fractol->screen).img))
 		return (FALSE);
 	(fractol->screen).addr = mlx_get_data_addr((fractol->screen).img,
@@ -39,9 +37,9 @@ static t_bool
 static t_bool
 	check_input(int ac, char **av)
 {
-	if (4 <= ac && av[1][0] == 'm')
+	if (2 <= ac && av[1][0] == 'm')
 		return (TRUE);
-	else if (6 <= ac && av[1][0] == 'j')
+	else if (4 <= ac && av[1][0] == 'j')
 		return (TRUE);
 	else
 		return (FALSE);

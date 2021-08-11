@@ -15,9 +15,9 @@
 
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 800
-# define MAX_ITERATION_M 20
-# define MAX_ITERATION_J 100
-# define MAX_ITERATION_B 50
+# define MAX_ITER_M 20
+# define MAX_ITER_J 100
+# define MAX_ITER_B 50
 # define THRESHOLD_RADIUS 2.0
 # define SCREEN_TITLE "fract-ol"
 # define PATH_TO_README "./tools/readme.txt"

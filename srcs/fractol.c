@@ -63,7 +63,10 @@ static void
 
 	fd = open(PATH_TO_README, O_RDONLY);
 	if (fd < 0)
-		exit(1);
+	{
+		perror(PROGRAM_NAME);
+		exit(EXIT_FAILURE);
+	}
 	while (1)
 	{
 		len = read(fd, buf, BUF_SIZE);
@@ -72,7 +75,7 @@ static void
 		write(STDOUT_FILENO, buf, len);
 	}
 	close(fd);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
 
 int
@@ -96,5 +99,5 @@ int
 	mlx_hook(fractol.screen.mlx_win, FOCUS_IN, FOCUS_CHANGE_MASK,
 		ft_put_image_to_window, &fractol);
 	mlx_loop(fractol.mlx);
-	return (0);
+	return (EXIT_SUCCESS);
 }

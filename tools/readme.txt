@@ -1,5 +1,7 @@
 ---
 
+fract-ol: a program to display images of 3 types of fracals (Mandelbrot set, Julia set, and Burning ship)
+
 [Usage]
 
 - Draw mandelbrot set:

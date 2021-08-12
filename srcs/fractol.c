@@ -25,7 +25,7 @@ static t_bool
 	if (!fractol->mlx)
 		return (FALSE);
 	(fractol->screen).mlx_win = mlx_new_window(fractol->mlx,
-			SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE);
+			SCREEN_WIDTH, SCREEN_HEIGHT, PROGRAM_NAME);
 	if (!((fractol->screen).mlx_win))
 		return (FALSE);
 	(fractol->screen).img = mlx_new_image(fractol->mlx,

@@ -13,20 +13,47 @@
 /* for read */
 # include <unistd.h>
 
+/* for perror */
+# include <stdio.h>
+
+/* program related macro variables */
+
+# define PROGRAM_NAME "fract-ol"
+
+/* screen size */
+
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 800
+
+/* Maximum number of interation for each fractal */
+
 # define MAX_ITER_M 20
 # define MAX_ITER_J 100
 # define MAX_ITER_B 50
+
+/* Threshold radius for diversion check */
+
 # define THRESHOLD_RADIUS 2.0
-# define SCREEN_TITLE "fract-ol"
+
+/* parameters to display README */
+
 # define PATH_TO_README "./tools/readme.txt"
 # define BUF_SIZE 1024
+
+/* initial max/min values for real / imaginary axis */
+
 # define MIN_REAL -2.5
 # define MIN_IMAG -2.5
 # define MAX_REAL 2.5
 # define MAX_IMAG 2.5
+
+/* parameter for mouse wheel zoom-in/out speed */
+
 # define ZOOM_FACTOR 0.9
+
+/* exit status of hook function */
+
+# define HOOK_SUCCESS 0
 
 /*
 ** X11 masks

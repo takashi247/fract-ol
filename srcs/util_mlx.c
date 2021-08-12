@@ -28,6 +28,7 @@ int
 	mlx_destroy_image(fractol->mlx, (fractol->screen).img);
 	mlx_destroy_window(fractol->mlx, (fractol->screen).mlx_win);
 	mlx_destroy_display(fractol->mlx);
+	free(fractol->mlx);
 	exit(EXIT_SUCCESS);
 }
 
@@ -52,5 +53,5 @@ int
 		return (ft_shift_window_left(fractol));
 	else if (key == K_AR_R)
 		return (ft_shift_window_right(fractol));
-	return (0);
+	return (HOOK_SUCCESS);
 }

@@ -23,20 +23,29 @@ void
 }
 
 int
-	ft_close_fractol(t_fractol *fractol)
+	ft_close_fractol(t_fractol *fractol, int exit_status)
 {
-	mlx_destroy_image(fractol->mlx, (fractol->screen).img);
-	mlx_destroy_window(fractol->mlx, (fractol->screen).mlx_win);
-	mlx_destroy_display(fractol->mlx);
-	free(fractol->mlx);
-	exit(EXIT_SUCCESS);
+	if (!fractol)
+		exit(exit_status);
+	if ((fractol->screen).img)
+		mlx_destroy_image(fractol->mlx, (fractol->screen).img);
+	if ((fractol->screen).mlx_win)
+		mlx_destroy_window(fractol->mlx, (fractol->screen).mlx_win);
+	if (fractol->mlx)
+		mlx_destroy_display(fractol->mlx);
+	if (fractol->mlx)
+	{
+		free(fractol->mlx);
+		fractol->mlx = NULL;
+	}
+	exit(exit_status);
 }
 
 int
 	ft_key_press(int key, t_fractol *fractol)
 {
 	if (key == K_ESC)
-		ft_close_fractol(fractol);
+		ft_close_fractol(fractol, EXIT_SUCCESS);
 	else if (key == K_C)
 		return (ft_change_color_mode(fractol));
 	else if (key == K_R)

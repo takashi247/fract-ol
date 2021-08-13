@@ -1,26 +1,29 @@
 #include "fractol.h"
 
 static void
-	set_initial_values(t_fractol *fractol)
+	set_initial_values(t_fractol *fractol, char **av)
 {
+	ft_bzero(fractol, sizeof(t_fractol));
 	fractol->min_real = MIN_REAL;
 	fractol->max_real = MAX_REAL;
 	fractol->min_imag = MIN_IMAG;
 	fractol->max_imag = MAX_IMAG;
 	fractol->is_value_shift_mode = TRUE;
 	fractol->base_hue = BLUE;
+	fractol->type = *av[1];
 }
 
 static t_bool
 	init_fractol(t_fractol *fractol, char **av)
 {
-	set_initial_values(fractol);
-	fractol->type = *av[1];
+	set_initial_values(fractol, av);
 	if (fractol->type == 'j')
 	{
 		fractol->c.real = ft_atof(av[2]);
 		fractol->c.imag = ft_atof(av[3]);
 	}
+	if (isinf(fractol->c.real) || isinf(fractol->c.imag))
+		return (FALSE);
 	fractol->mlx = mlx_init();
 	if (!fractol->mlx)
 		return (FALSE);
@@ -55,7 +58,7 @@ static t_bool
 }
 
 static void
-	exit_with_instruction(void)
+	exit_with_instruction(t_fractol *fractol)
 {
 	int			fd;
 	int			len;
@@ -65,7 +68,7 @@ static void
 	if (fd < 0)
 	{
 		perror(PROGRAM_NAME);
-		exit(EXIT_FAILURE);
+		ft_close_fractol(fractol, EXIT_FAILURE);
 	}
 	while (1)
 	{
@@ -75,7 +78,7 @@ static void
 		write(STDOUT_FILENO, buf, len);
 	}
 	close(fd);
-	exit(EXIT_SUCCESS);
+	ft_close_fractol(fractol, EXIT_SUCCESS);
 }
 
 int
@@ -84,10 +87,9 @@ int
 	t_fractol		fractol;
 
 	if (!check_input(ac, av))
-		exit_with_instruction();
-	if (!init_fractol(&fractol, av) || isinf(fractol.c.real)
-		|| isinf(fractol.c.imag))
-		exit_with_instruction();
+		exit_with_instruction(NULL);
+	if (!init_fractol(&fractol, av))
+		exit_with_instruction(&fractol);
 	ft_draw_fractal(fractol);
 	mlx_put_image_to_window(fractol.mlx, fractol.screen.mlx_win,
 		fractol.screen.img, 0, 0);

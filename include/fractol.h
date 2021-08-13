@@ -168,7 +168,7 @@ double		ft_get_modulus(t_complex z);
 
 /* util_mlx.c */
 void		ft_mlx_pixel_put_screen(t_screen *screen, int x, int y, int color);
-int			ft_close_fractol(t_fractol *fractol);
+int			ft_close_fractol(t_fractol *fractol, int exit_status);
 int			ft_key_press(int key, t_fractol *fractol);
 int			ft_create_rgb(int r, int g, int b);
 int			ft_put_image_to_window(t_fractol *fractol);

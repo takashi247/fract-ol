@@ -85,7 +85,8 @@ int
 
 	if (!check_input(ac, av))
 		exit_with_instruction();
-	if (!init_fractol(&fractol, av))
+	if (!init_fractol(&fractol, av) || isinf(fractol.c.real)
+		|| isinf(fractol.c.imag))
 		exit_with_instruction();
 	ft_draw_fractal(fractol);
 	mlx_put_image_to_window(fractol.mlx, fractol.screen.mlx_win,

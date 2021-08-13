@@ -5,7 +5,7 @@ t_complex
 {
 	t_complex	squared;
 
-	squared.real = pow(z.real, 2.0) - pow(z.imag, 2.0);
+	squared.real = z.real * z.real - z.imag * z.imag;
 	squared.imag = 2.0 * z.real * z.imag;
 	return (squared);
 }
@@ -23,5 +23,5 @@ t_complex
 double
 	ft_get_modulus(t_complex z)
 {
-	return (pow(z.real, 2.0) + pow(z.imag, 2.0));
+	return (z.real * z.real + z.imag * z.imag);
 }

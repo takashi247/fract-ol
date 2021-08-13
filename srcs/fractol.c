@@ -8,7 +8,7 @@ static void
 	fractol->max_real = MAX_REAL;
 	fractol->min_imag = MIN_IMAG;
 	fractol->max_imag = MAX_IMAG;
-	fractol->is_value_shift_mode = TRUE;
+	fractol->is_value_shift_mode = FALSE;
 	fractol->base_hue = BLUE;
 	fractol->type = *av[1];
 }

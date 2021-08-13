@@ -27,7 +27,7 @@
 
 /* Maximum number of interation for each fractal */
 
-# define MAX_ITER_M 20
+# define MAX_ITER_M 100
 # define MAX_ITER_J 100
 # define MAX_ITER_B 50
 

@@ -11,7 +11,9 @@ SRCS		:= draw_fractal.c \
 				util_color.c \
 				zoom.c \
 				shift_window.c \
-				change_color.c
+				change_color.c \
+				change_resolution.c \
+				show_manual.c
 
 SRCSDIR		:= ./srcs/
 

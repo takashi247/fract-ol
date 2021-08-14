@@ -43,3 +43,16 @@ int
 		fractol->screen.img, 0, 0);
 	return (HOOK_SUCCESS);
 }
+
+int
+	ft_reset_position(t_fractol *fractol)
+{
+	fractol->min_real = MIN_REAL;
+	fractol->max_real = MAX_REAL;
+	fractol->min_imag = MIN_IMAG;
+	fractol->max_imag = MAX_IMAG;
+	ft_draw_fractal(*fractol);
+	mlx_put_image_to_window(fractol->mlx, fractol->screen.mlx_win,
+		fractol->screen.img, 0, 0);
+	return (HOOK_SUCCESS);
+}

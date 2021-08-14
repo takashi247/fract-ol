@@ -62,5 +62,11 @@ int
 		return (ft_shift_window_left(fractol));
 	else if (key == K_AR_R)
 		return (ft_shift_window_right(fractol));
+	else if (key == K_SPACE)
+		return (ft_reset_position(fractol));
+	else if (key == K_W || key == K_S)
+		return (ft_change_resolution(key, fractol));
+	else if (key == K_I)
+		return (ft_show_manual(fractol));
 	return (HOOK_SUCCESS);
 }

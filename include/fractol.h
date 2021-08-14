@@ -51,6 +51,11 @@
 
 # define ZOOM_FACTOR 0.9
 
+/* parameter for resolution change */
+
+# define MIN_ITER 10
+# define ITER_STEP 2
+
 /* exit status of hook function */
 
 # define HOOK_SUCCESS 0
@@ -82,6 +87,10 @@
 # define K_R 0x72
 # define K_G 0x67
 # define K_B 0x62
+# define K_SPACE 0x20
+# define K_W 0x77
+# define K_S 0x73
+# define K_I 0x69
 
 /*
 ** Keyboard ARROWS and ESC
@@ -157,6 +166,7 @@ typedef struct s_fractol
 	double		max_real;
 	double		min_imag;
 	double		max_imag;
+	int			max_iter;
 	t_complex	c;
 	t_screen	screen;
 }	t_fractol;
@@ -190,11 +200,18 @@ int			ft_shift_window_up(t_fractol *fractol);
 int			ft_shift_window_down(t_fractol *fractol);
 int			ft_shift_window_right(t_fractol *fractol);
 int			ft_shift_window_left(t_fractol *fractol);
+int			ft_reset_position(t_fractol *fractol);
 
 /* change_color.c */
 int			ft_make_red(t_fractol *fractol);
 int			ft_make_green(t_fractol *fractol);
 int			ft_make_blue(t_fractol *fractol);
 int			ft_change_color_mode(t_fractol *fractol);
+
+/* change_resolution.c */
+int			ft_change_resolution(int key, t_fractol *fractol);
+
+/* show_manual.c */
+int			ft_show_manual(t_fractol *fractol);
 
 #endif

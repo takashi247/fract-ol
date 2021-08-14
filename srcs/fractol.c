@@ -9,8 +9,14 @@ static void
 	fractol->min_imag = MIN_IMAG;
 	fractol->max_imag = MAX_IMAG;
 	fractol->is_value_shift_mode = FALSE;
-	fractol->base_hue = BLUE;
+	fractol->base_hue = GREEN;
 	fractol->type = *av[1];
+	if (fractol->type == 'm')
+		fractol->max_iter = MAX_ITER_M;
+	else if (fractol->type == 'j')
+		fractol->max_iter = MAX_ITER_J;
+	else
+		fractol->max_iter = MAX_ITER_B;
 }
 
 static t_bool
@@ -60,24 +66,7 @@ static t_bool
 static void
 	exit_with_instruction(t_fractol *fractol)
 {
-	int			fd;
-	int			len;
-	char		buf[BUF_SIZE];
-
-	fd = open(PATH_TO_README, O_RDONLY);
-	if (fd < 0)
-	{
-		perror(PROGRAM_NAME);
-		ft_close_fractol(fractol, EXIT_FAILURE);
-	}
-	while (1)
-	{
-		len = read(fd, buf, BUF_SIZE);
-		if (!len)
-			break ;
-		write(STDOUT_FILENO, buf, len);
-	}
-	close(fd);
+	ft_show_manual(fractol);
 	ft_close_fractol(fractol, EXIT_SUCCESS);
 }
 

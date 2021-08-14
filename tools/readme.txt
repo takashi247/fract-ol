@@ -21,6 +21,10 @@ fract-ol: a program to display images of 3 types of fracals (Mandelbrot set, Jul
 
 - R/G/B: Change the base-hue to red/green/red respectively
 
+- W/S: Increase/decrease resolution
+
+- SPACE: Reset position
+
 [Mouse actions]
 
 - Mouse wheel: Zoom in/out to the mouse position on the screen

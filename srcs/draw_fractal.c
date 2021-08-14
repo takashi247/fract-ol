@@ -13,11 +13,11 @@ static void
 		* (double)col / (double)SCREEN_WIDTH;
 	c.imag = fractol.min_imag + (fractol.max_imag - fractol.min_imag)
 		* (double)row / (double)SCREEN_HEIGHT;
-	num_iteration = ft_count_iteration_b(z, c, MAX_ITER_B);
+	num_iteration = ft_count_iteration_b(z, c, fractol.max_iter);
 	if (fractol.is_value_shift_mode)
-		color = ft_get_color_v(num_iteration, fractol.base_hue, MAX_ITER_B);
+		color = ft_get_color_v(num_iteration, fractol.base_hue, fractol.max_iter);
 	else
-		color = ft_get_color_h(num_iteration, MAX_ITER_B);
+		color = ft_get_color_h(num_iteration, fractol.max_iter);
 	ft_mlx_pixel_put_screen(&(fractol.screen), col, row, color);
 }
 
@@ -34,11 +34,11 @@ static void
 		* (double)col / (double)SCREEN_WIDTH;
 	c.imag = fractol.min_imag + (fractol.max_imag - fractol.min_imag)
 		* (double)row / (double)SCREEN_HEIGHT;
-	num_iteration = ft_count_iteration(z, c, MAX_ITER_M);
+	num_iteration = ft_count_iteration(z, c, fractol.max_iter);
 	if (fractol.is_value_shift_mode)
-		color = ft_get_color_v(num_iteration, fractol.base_hue, MAX_ITER_M);
+		color = ft_get_color_v(num_iteration, fractol.base_hue, fractol.max_iter);
 	else
-		color = ft_get_color_h(num_iteration, MAX_ITER_M);
+		color = ft_get_color_h(num_iteration, fractol.max_iter);
 	ft_mlx_pixel_put_screen(&(fractol.screen), col, row, color);
 }
 
@@ -53,11 +53,11 @@ static void
 		* (double)col / SCREEN_WIDTH;
 	z.imag = fractol.min_imag + (fractol.max_imag - fractol.min_imag)
 		* (double)row / SCREEN_HEIGHT;
-	num_iteration = ft_count_iteration(z, fractol.c, MAX_ITER_J);
+	num_iteration = ft_count_iteration(z, fractol.c, fractol.max_iter);
 	if (fractol.is_value_shift_mode)
-		color = ft_get_color_v(num_iteration, fractol.base_hue, MAX_ITER_J);
+		color = ft_get_color_v(num_iteration, fractol.base_hue, fractol.max_iter);
 	else
-		color = ft_get_color_h(num_iteration, MAX_ITER_J);
+		color = ft_get_color_h(num_iteration, fractol.max_iter);
 	ft_mlx_pixel_put_screen(&(fractol.screen), col, row, color);
 }
 

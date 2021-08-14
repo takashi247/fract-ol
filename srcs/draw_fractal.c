@@ -15,7 +15,8 @@ static void
 		* (double)row / (double)SCREEN_HEIGHT;
 	num_iteration = ft_count_iteration_b(z, c, fractol.max_iter);
 	if (fractol.is_value_shift_mode)
-		color = ft_get_color_v(num_iteration, fractol.base_hue, fractol.max_iter);
+		color = ft_get_color_v(num_iteration, fractol.base_hue,
+				fractol.max_iter);
 	else
 		color = ft_get_color_h(num_iteration, fractol.max_iter);
 	ft_mlx_pixel_put_screen(&(fractol.screen), col, row, color);
@@ -36,7 +37,8 @@ static void
 		* (double)row / (double)SCREEN_HEIGHT;
 	num_iteration = ft_count_iteration(z, c, fractol.max_iter);
 	if (fractol.is_value_shift_mode)
-		color = ft_get_color_v(num_iteration, fractol.base_hue, fractol.max_iter);
+		color = ft_get_color_v(num_iteration, fractol.base_hue,
+				fractol.max_iter);
 	else
 		color = ft_get_color_h(num_iteration, fractol.max_iter);
 	ft_mlx_pixel_put_screen(&(fractol.screen), col, row, color);
@@ -55,7 +57,8 @@ static void
 		* (double)row / SCREEN_HEIGHT;
 	num_iteration = ft_count_iteration(z, fractol.c, fractol.max_iter);
 	if (fractol.is_value_shift_mode)
-		color = ft_get_color_v(num_iteration, fractol.base_hue, fractol.max_iter);
+		color = ft_get_color_v(num_iteration, fractol.base_hue,
+				fractol.max_iter);
 	else
 		color = ft_get_color_h(num_iteration, fractol.max_iter);
 	ft_mlx_pixel_put_screen(&(fractol.screen), col, row, color);

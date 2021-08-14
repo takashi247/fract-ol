@@ -11,7 +11,7 @@ static void
 	ft_bzero(&z, sizeof(t_complex));
 	c.real = fractol.min_real + (fractol.max_real - fractol.min_real)
 		* (double)col / (double)SCREEN_WIDTH;
-	c.imag = fractol.max_imag - (fractol.max_imag - fractol.min_imag)
+	c.imag = fractol.min_imag + (fractol.max_imag - fractol.min_imag)
 		* (double)row / (double)SCREEN_HEIGHT;
 	num_iteration = ft_count_iteration_b(z, c, MAX_ITER_B);
 	if (fractol.is_value_shift_mode)
@@ -32,7 +32,7 @@ static void
 	ft_bzero(&z, sizeof(t_complex));
 	c.real = fractol.min_real + (fractol.max_real - fractol.min_real)
 		* (double)col / (double)SCREEN_WIDTH;
-	c.imag = fractol.max_imag - (fractol.max_imag - fractol.min_imag)
+	c.imag = fractol.min_imag + (fractol.max_imag - fractol.min_imag)
 		* (double)row / (double)SCREEN_HEIGHT;
 	num_iteration = ft_count_iteration(z, c, MAX_ITER_M);
 	if (fractol.is_value_shift_mode)
@@ -51,7 +51,7 @@ static void
 
 	z.real = fractol.min_real + (fractol.max_real - fractol.min_real)
 		* (double)col / SCREEN_WIDTH;
-	z.imag = fractol.max_imag - (fractol.max_imag - fractol.min_imag)
+	z.imag = fractol.min_imag + (fractol.max_imag - fractol.min_imag)
 		* (double)row / SCREEN_HEIGHT;
 	num_iteration = ft_count_iteration(z, fractol.c, MAX_ITER_J);
 	if (fractol.is_value_shift_mode)

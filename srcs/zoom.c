@@ -27,8 +27,8 @@ int
 {
 	const double	pos_x = fractol->min_real
 		+ (fractol->max_real - fractol->min_real) * x / SCREEN_WIDTH;
-	const double	pos_y = fractol->max_imag
-		- (fractol->max_imag - fractol->min_imag) * y / SCREEN_HEIGHT;
+	const double	pos_y = fractol->min_imag
+		+ (fractol->max_imag - fractol->min_imag) * y / SCREEN_HEIGHT;
 
 	if (button == MOUSE_ZOOM_IN)
 		zoom_in(pos_x, pos_y, fractol);
